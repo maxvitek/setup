@@ -24,7 +24,6 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set relativenumber
 set undofile
 
 set wrap
@@ -36,7 +35,6 @@ nnoremap / /\v
 vnoremap / /\v
 set ignorecase
 set smartcase
-set gdefault
 set incsearch
 set showmatch
 set hlsearch
@@ -44,9 +42,13 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
+" syntastic
+let g:syntastic_python_checker = 'pylint'
+
 " mapping ctrl+h and ctrl+l to open additional file buffers
 :noremap <C-h> :bprev<CR>
 :noremap <C-l> :bnext<CR>
 
 " let's turn on NERDTree
+let NERDTreeIgnore = ['\.pyc$']
 autocmd VimEnter * NERDTree
