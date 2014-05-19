@@ -1,3 +1,9 @@
+# tmux, don't clobber my path
+if [ -f /etc/profile ]; then
+    PATH=""
+    source /etc/profile
+fi
+
 # declare editor
 export EDITOR='mvim -v'
 
@@ -16,10 +22,24 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # colorize grep
 export GREP_OPTIONS='--color=always'
-export GREP_COLOR='1;35;40'
+export GREP_COLOR='1;32'
 
-# colorize prompt
-hr=________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-DIVIDER="${hr:0:${COLUMNS:-$(tput cols)}}"
-export PS1="\[\e[34m\]$DIVIDER\n\[\e[32m\](\[\e[37;1m\]\u\[\e[0m\]\[\e[32m\])-(\[\e[37;1m\]\H\[\e[0m\]\[\e[32m\])-(\[\e[37;1m\]\w\[\e[0m\]\[\e[32m\])-(\[\e[37;1m\]jobs: \j\[\e[0m\]\[\e[32m\])\n(\[\[\e[37;1m\]!\!\[\e[0m\]\[\e[32m\])->\[\e[36m\]>\[\e[32;1m\]>\[\e[36;1m\]> \[\e[0m\]"
-export PS2="\[\e[32m\])-> \[\e[0m\]"
+RESET="\[\e[0m\]"
+if [[ $OSTYPE == 'darwin13' ]]; then    
+    # colorize prompt
+    FRAME="$RESET\[\e[32m\]"
+    INFO="\[\e[33m\]\[\e[1m\]" 
+
+elif [[ $OSTYPE == 'linux-gnu' ]]; then
+    # colorize prompt
+    FRAME="$RESET\[\e[34m\]"
+    INFO="\[\e[37m\]\[\e[1m\]"
+
+elif [[ $OSTYPE == 'linux-gnueabihf' ]]; then
+    # colorize prompt
+    FRAME="$RESET\[\e[35m\]"
+    INFO="\[\e[32m\]\[\e[1m\]"
+fi
+PROMPT="$FRAME($INFO\!$FRAME)---> $RESET"
+export PS1="\n$FRAME($INFO\u$FRAME)-($INFO\H$FRAME)-($INFO\w$FRAME)-(${INFO}jobs: \j$FRAME)\n$PROMPT"
+export PS2="$FRAME> $RESET"

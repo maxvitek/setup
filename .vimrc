@@ -50,5 +50,5 @@ let g:syntastic_python_checker = 'pylint'
 :noremap <C-l> :bnext<CR>
 
 " let's turn on NERDTree
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '\.un\~$', '\.swp$']
 autocmd VimEnter * NERDTree
