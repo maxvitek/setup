@@ -1,7 +1,9 @@
 # tmux, don't clobber my path
-if [ -f /etc/profile ]; then
-    PATH=""
-    source /etc/profile
+if [[ $OSTYPE == 'darwin13' ]]; then
+    if [ -f /etc/profile ]; then
+        PATH=""
+        source /etc/profile
+    fi
 fi
 
 # declare editor
