@@ -1,9 +1,44 @@
+set nocompatible
+
+" Auto installing NeoBundle
+let iCanHazNeoBundle=1
+let neobundle_readme=expand($HOME.'/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+    echo "Installing NeoBundle.."
+    echo ""
+    silent !mkdir -p $HOME/.vim/bundle
+    silent !git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+    let iCanHazNeoBundle=0
+endif
+
+" Call NeoBundle
+if has('vim_starting')
+    set rtp+=$HOME/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand($HOME.'/.vim/bundle/'))
+
+" is better if NeoBundle rules NeoBundle (needed!)
+NeoBundle 'Shougo/neobundle.vim'
+
+" the other bundles:
+NeoBundle 'vim-scripts/closetag.vim'
+NeoBundle 'alfredodeza/coveragepy.vim'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'vim-scripts/django.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'vim-scripts/taglist.vim'
+NeoBundle 'jplaut/vim-arduino-ino'
+NeoBundle 'tpope/vim-sensible'
+
+" some colors
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'croaker/mustang-vim'
+NeoBundle 'jnurmine/Zenburn'
+
 colorscheme zenburn
-execute pathogen#infect()
 syntax on
 filetype plugin indent on
-
-set nocompatible
 
 set tabstop=4
 set shiftwidth=4
@@ -29,7 +64,7 @@ set undofile
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+set colorcolumn=80
 
 nnoremap / /\v
 vnoremap / /\v
@@ -38,7 +73,6 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
