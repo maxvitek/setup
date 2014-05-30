@@ -70,6 +70,7 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=80
+set nu
 
 nnoremap / /\v
 vnoremap / /\v

@@ -45,3 +45,8 @@ fi
 PROMPT="$FRAME($INFO\!$FRAME)---> $RESET"
 export PS1="\n$FRAME($INFO\u$FRAME)-($INFO\H$FRAME)-($INFO\w$FRAME)-(${INFO}jobs: \j$FRAME)\n$PROMPT"
 export PS2="$FRAME> $RESET"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
