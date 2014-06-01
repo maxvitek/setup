@@ -15,7 +15,7 @@ endif
 if has('vim_starting')
     set rtp+=$HOME/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand($HOME.'/.vim/bundle/'))
+call neobundle#begin(expand($HOME.'/.vim/bundle/'))
 
 " is better if NeoBundle rules NeoBundle (needed!)
 NeoBundle 'Shougo/neobundle.vim'
@@ -36,9 +36,14 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'croaker/mustang-vim'
 NeoBundle 'jnurmine/Zenburn'
 
+call neobundle#end()
+
+filetype plugin indent on
+
+NeoBundleCheck
+
 colorscheme zenburn
 syntax on
-filetype plugin indent on
 
 set tabstop=4
 set shiftwidth=4
@@ -65,6 +70,7 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=80
+set nu
 
 nnoremap / /\v
 vnoremap / /\v
