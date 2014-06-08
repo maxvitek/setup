@@ -41,7 +41,13 @@ elif [[ $OSTYPE == 'linux-gnueabihf' ]]; then
     # colorize prompt
     FRAME="$RESET\[\e[35m\]"
     INFO="\[\e[32m\]\[\e[1m\]"
+
+elif [[ $OSTYPE == 'linux-gnueabi' ]]; then
+    # colorize prompt
+    FRAME="$RESET\[\e[33m\]"
+    INFO="\[\e[31m\]\[\e[1m\]"
 fi
+
 PROMPT="$FRAME($INFO\!$FRAME)---> $RESET"
 export PS1="\n$FRAME($INFO\u$FRAME)-($INFO\H$FRAME)-($INFO\w$FRAME)-(${INFO}jobs: \j$FRAME)\n$PROMPT"
 export PS2="$FRAME> $RESET"
