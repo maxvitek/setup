@@ -30,6 +30,12 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'jplaut/vim-arduino-ino'
 NeoBundle 'tpope/vim-sensible'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundleLazy 'lambdalisue/vim-pyenv', {
+    \ 'depends': ['davidhalter/jedi-vim'],
+    \ 'autoload': {
+    \   'filetypes': ['python', 'python3'],
+    \ }}
 
 " some colors
 NeoBundle 'altercation/vim-colors-solarized'
