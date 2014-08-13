@@ -89,7 +89,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " syntastic
-let g:syntastic_python_checker = 'pylint'
+let g:syntastic_python_checkers = ['pylint']
 
 " mapping ctrl+h and ctrl+l to open additional file buffers
 :noremap <C-h> :bprev<CR>
