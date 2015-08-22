@@ -1,3 +1,6 @@
+# bashrc
+. ~/.bashrc
+
 # tmux, don't clobber my path
 if [[ $OSTYPE == 'darwin13' ]]; then
     if [ -f /etc/profile ]; then
@@ -7,13 +10,7 @@ if [[ $OSTYPE == 'darwin13' ]]; then
 fi
 
 # declare editor
-export EDITOR='mvim -v'
-
-# added by Anaconda 1.9.2 installer
-export PATH="/Users/maxvitek/anaconda/bin:$PATH"
-
-# adding TeX stuff
-export PATH="/usr/texbin:$PATH"
+export EDITOR='vim'
 
 # colorize terminal
 export TERM=xterm-256color
@@ -25,6 +22,36 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # colorize grep
 export GREP_OPTIONS='--color=always'
 export GREP_COLOR='1;32'
+
+# pyenv
+if [ -d ~/.pyenv ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
+# get python
+get_python() {
+    if [ -d ~/.pyenv ]; then
+        pyenv version | awk '{print$1}'
+    else
+        which python
+    fi
+}
+
+# git branch
+parse_git_branch() {
+
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# get OS flavor
+get_os_flavor() {
+
+    cat /etc/lsb-release | sed 's/=/ /g' | awk '{print$2}' | sed ':a;N;$!ba;s/\n/ /g' | awk '{print$1" "$2}'
+}
+
+# prompt
 
 RESET="\[\e[0m\]"
 if [[ $OSTYPE == 'darwin13' ]]; then    
@@ -49,10 +76,6 @@ elif [[ $OSTYPE == 'linux-gnueabi' ]]; then
 fi
 
 PROMPT="$FRAME($INFO\!$FRAME)---> $RESET"
-export PS1="\n$FRAME($INFO\u$FRAME)-($INFO\H$FRAME)-($INFO\w$FRAME)-(${INFO}jobs: \j$FRAME)\n$PROMPT"
+export PS1="\n$FRAME<$INFO\u$FRAME($INFO\$(get_python)$FRAME)>-<$INFO\H$FRAME($INFO\$(get_os_flavor)$FRAME):$INFO\w$FRAME>-<${INFO}git$FRAME($INFO\$(parse_git_branch)$FRAME)>\n$PROMPT"
 export PS2="$FRAME> $RESET"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"

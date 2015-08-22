@@ -31,6 +31,7 @@ NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'jplaut/vim-arduino-ino'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundleLazy 'lambdalisue/vim-pyenv', {
     \ 'depends': ['davidhalter/jedi-vim'],
     \ 'autoload': {
@@ -47,6 +48,9 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
+
+let pyindent_nested_paren="&sw*2"
+let pyindent_open_paren="&sw*2"
 
 colorscheme zenburn
 syntax on
@@ -88,8 +92,12 @@ set hlsearch
 nnoremap <tab> %
 vnoremap <tab> %
 
+" comment / uncomment lines
+vnoremap # :s#^#\##<cr>
+vnoremap -# :s#^\###<cr>
+
 " syntastic
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['flake8', 'pep8', 'pylint']
 
 " mapping ctrl+h and ctrl+l to open additional file buffers
 :noremap <C-h> :bprev<CR>
