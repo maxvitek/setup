@@ -1,6 +1,9 @@
 # bashrc
 . ~/.bashrc
 
+# bash aliases
+. ~/.bash_aliases
+
 # tmux, don't clobber my path
 if [[ $OSTYPE == 'darwin13' ]]; then
     if [ -f /etc/profile ]; then
