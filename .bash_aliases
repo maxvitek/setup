@@ -1,1 +1,1 @@
-alias ll="ls -l"
+alias ll="ls -l --color=auto"
